@@ -1,5 +1,9 @@
 # Story Crowdsource Preference System
 
+🌟 **We're creating an open source dataset for story preferences! Star this repository to be notified when we release it.** 🌟
+
+Try it now: [Story Preference Collection App](https://storycrowdsourcepreference.streamlit.app)
+
 A comprehensive system for collecting, analyzing, and learning from story preferences using AI models and human feedback. This project combines multiple AI models with human feedback to improve story generation and preference learning.
 
 ## Overview
@@ -14,7 +18,8 @@ The system consists of several key components:
 
 ## Key Highlights
 
-- **Open Source Dataset**: We will open source the dataset, making it a valuable resource for both the tech and writer communities.
+- **Open Source Dataset**: We will open source the dataset here in this repository, making it a valuable resource for both the tech and writer communities.
+- **Live Demo**: Try our [Story Preference Collection App](https://storycrowdsourcepreference.streamlit.app) to contribute your preferences
 - **Streamlit + Supabase**: The system is built using Streamlit for the web interface and Supabase for data management.
 - **Benchmarking Tool**: This dataset will be instrumental in benchmarking Large Language Models (LLMs) for creative writing.
 
@@ -29,8 +34,8 @@ The system consists of several key components:
 
 ## Participate and Contribute
 
-- **Input Your Preferences**: Visit our hosted Streamlit app to input your story preferences and contribute to the dataset.
-- **Star the Repository**: Stay updated and show your support by starring the repository. Be the first to know when the dataset is released.
+- **⭐ Star the Repository**: Your first step! Star this repository to show your support and be notified when we release the dataset.
+- **Input Your Preferences**: Visit our [Story Preference Collection App](https://storycrowdsourcepreference.streamlit.app) to input your story preferences and contribute to the dataset.
 
 ## Prerequisites
 
