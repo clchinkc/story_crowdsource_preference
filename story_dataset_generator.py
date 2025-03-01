@@ -275,7 +275,7 @@ def save_dataset_to_supabase(dataset: StoryDataset):
                 "preferred_index": comparison.preferred_index,
                 "evaluation_metadata": json.dumps({
                     "model_metadata": dataset.model_metadata,
-                    "evaluation": comparison.dict()
+                    "reasoning": comparison.reasoning
                 }),
                 "created_at": dataset.generated_at
             })

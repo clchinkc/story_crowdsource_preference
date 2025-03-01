@@ -235,7 +235,7 @@ def evaluate_epoch(model, dataloader, loss_fn, device):
 
 def train_and_evaluate():
     config = {
-        'batch_size': 8,
+        'batch_size': 4,
         'num_epochs': 5,
         'learning_rate': 3e-5,
         'test_size': 0.2,
@@ -305,7 +305,7 @@ def train_and_evaluate():
         print(f"Accuracy: {accuracy:.2%} | Test Samples: {len(test_dataset)}")
         
         # Save best model's regressor state only
-        if accuracy > best_accuracy:
+        if accuracy >= best_accuracy:
             best_accuracy = accuracy
             best_regressor_state = model.regressor.state_dict().copy()
             print(f"New best accuracy: {best_accuracy:.2%}")
