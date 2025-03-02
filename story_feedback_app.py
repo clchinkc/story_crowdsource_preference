@@ -215,17 +215,14 @@ def main():
         
         # Generation controls
         if st.button("Generate Story Variations"):
-            if model1 == model2:
-                st.warning("Please select different models for comparison")
-            else:
-                with st.spinner("Creating story variants..."):
-                    model_choices = [model1, model2]
-                    prompt, variations = generate_story_variations(user_prompt, model_choices)
-                    if variations and len(variations) >= 2:
-                        st.session_state.prompt = prompt
-                        st.session_state.variations = variations
-                        st.session_state.model_choices = model_choices
-                        st.rerun()
+            with st.spinner("Creating story variants..."):
+                model_choices = [model1, model2]
+                prompt, variations = generate_story_variations(user_prompt, model_choices)
+                if variations and len(variations) >= 2:
+                    st.session_state.prompt = prompt
+                    st.session_state.variations = variations
+                    st.session_state.model_choices = model_choices
+                    st.rerun()
         
         # Display variations
         if st.session_state.variations:

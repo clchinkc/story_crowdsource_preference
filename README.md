@@ -2,7 +2,9 @@
 
 🌟 **We're creating an open source dataset for story preferences! Star this repository to be notified when we release it.** 🌟
 
-Try it now: [Story Preference Collection App](https://storycrowdsourcepreference.streamlit.app)
+[![X URL](https://img.shields.io/twitter/url/https/x.com/doc_editor_saas.svg?style=social&label=Follow%20%40doc_editor_saas)](https://x.com/doc_editor_saas)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://storycrowdsourcepreference.streamlit.app)
+
 
 A comprehensive system for collecting, analyzing, and learning from story preferences using AI models and human feedback. This project combines multiple AI models with human feedback to improve story generation and preference learning.
 
