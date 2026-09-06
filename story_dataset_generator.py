@@ -375,21 +375,21 @@ if __name__ == "__main__":
     providers_config = {
         "prompt": {
             "provider": "github",
-            "model": "openai/gpt-4o-mini"
+            "model": "openai/gpt-5.6-luna"
         },
         "variations": [
             {
                 "provider": "gemini",
-                "model": "gemini/gemini-2.0-flash-exp"
+                "model": "gemini/gemini-3.5-flash-lite"
             },
             {
                 "provider": "azure",
-                "model": "azure/gpt-4o-mini"
+                "model": "azure/gpt-5.6-luna"
             }
         ],
         "evaluation": {
             "provider": "azure",
-            "model": "azure/gpt-4o-mini"
+            "model": "azure/gpt-5.6-luna"
         }
     }
     

@@ -12,18 +12,18 @@ from st_supabase_connection import SupabaseConnection
 PROVIDERS_CONFIG = {
     "prompt": {
         "provider": "github",
-        "model": "openai/gpt-4o-mini"
+        "model": "openai/gpt-5.6-luna"
     },
     "available_models": [
         {
             "provider": "gemini",
-            "model": "gemini/gemini-2.0-flash-exp",
-            "display_name": "Gemini 2.0 Flash"
+            "model": "gemini/gemini-3.5-flash-lite",
+            "display_name": "Gemini 3.5 Flash Lite"
         },
         {
             "provider": "azure",
-            "model": "azure/gpt-4o-mini",
-            "display_name": "Azure GPT-4o-mini"
+            "model": "azure/gpt-5.6-luna",
+            "display_name": "Azure GPT-5.6 Luna"
         }
     ]
 }
