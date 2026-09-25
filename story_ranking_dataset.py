@@ -69,7 +69,7 @@ class StoryPairDataset(Dataset):
             except Exception as e:
                 print(f"Error processing entry {entry.get('id', 'unknown')}: {str(e)}")
         
-        # Calculate number of samples to take from each source
+        # Reference size: the largest non-empty source group
         max_samples = max(len(group) for group in source_groups.values() if len(group) > 0)
         
         for source, weight in source_weights.items():
@@ -155,7 +155,6 @@ class StoryRewardModel(nn.Module):
     @classmethod
     def load(cls, path='story_reward_model.pth'):
         model = cls()  # This initializes a fresh BERT model
-        # Check if file exists before loading
         if os.path.exists(path):
             # Only load the regressor parameters
             model.regressor.load_state_dict(torch.load(path, map_location='cpu'))
@@ -181,7 +180,7 @@ def train_epoch(model, dataloader, optimizer, scheduler, loss_fn, device):
         labels = batch['labels']
         
         # Convert labels from 1/2 to 0/1
-        labels = labels - 1  # Now 0 or 1
+        labels = labels - 1
         
         flat_input_ids = input_ids.view(-1, input_ids.size(-1))
         flat_attention_mask = attention_mask.view(-1, attention_mask.size(-1))
@@ -215,7 +214,7 @@ def evaluate_epoch(model, dataloader, loss_fn, device):
             labels = batch['labels']
             
             # Convert labels from 1/2 to 0/1
-            labels = labels - 1  # Now 0 or 1
+            labels = labels - 1
             
             flat_input_ids = input_ids.view(-1, input_ids.size(-1))
             flat_attention_mask = attention_mask.view(-1, attention_mask.size(-1))
@@ -247,7 +246,7 @@ def train_and_evaluate():
             'human': 2.0   # Double weight to human feedback
         },
         'model_path': 'story_reward_model.pth',
-        'continue_training': True  # Set to True to load and continue training existing model
+        'continue_training': True  # resume from the existing checkpoint when present
     }
     
     device = get_device()

@@ -12,7 +12,7 @@ A comprehensive system for collecting, analyzing, and learning from story prefer
 
 The system consists of several key components:
 
-1. **Story Generation**: Uses multiple AI models (GPT-4, Gemini, etc.) to generate story variations from prompts
+1. **Story Generation**: Uses multiple AI providers (GitHub Models, Gemini, Azure) to generate story variations from prompts
 2. **Feedback Collection**: Web interface for collecting human preferences between story variations
 3. **Embedding Processing**: Generates and stores embeddings for story variations
 4. **Reward Model Training**: Trains a reward model based on collected preferences
@@ -41,17 +41,17 @@ The system consists of several key components:
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.10+
 - PyTorch
 - CUDA-compatible GPU (optional, but recommended for training)
 - Supabase account and project
-- API keys for supported AI models (GPT-4, Gemini, etc.)
+- API keys for the supported providers (GitHub Models, Gemini, Azure)
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/story_crowdsource_preference.git
+git clone https://github.com/clchinkc/story_crowdsource_preference.git
 cd story_crowdsource_preference
 ```
 
@@ -117,29 +117,38 @@ python story_ranking_dataset.py
 ## Configuration
 
 ### Provider Configuration
-The system supports multiple AI providers with configurable weights and models:
+The system supports multiple AI providers with configurable models. The batch
+generator's `providers_config` (in `story_dataset_generator.py`):
 
 ```python
-PROVIDERS_CONFIG = {
+providers_config = {
     "prompt": {
         "provider": "github",
-        "model": "openai/gpt-4o-mini"
+        "model": "openai/gpt-5.6-luna"
     },
     "variations": [
         {
             "provider": "gemini",
-            "model": "gemini/gemini-2.0-flash-exp"
+            "model": "gemini/gemini-3.5-flash-lite"
         },
         {
             "provider": "azure",
-            "model": "azure/gpt-4o-mini"
+            "model": "azure/gpt-5.6-luna"
         }
-    ]
+    ],
+    "evaluation": {
+        "provider": "azure",
+        "model": "azure/gpt-5.6-luna"
+    }
 }
 ```
 
+The Streamlit app (`story_feedback_app.py`) keeps its own `PROVIDERS_CONFIG`
+with an `available_models` list for the comparison UI.
+
 ### Training Configuration
-Customize reward model training parameters:
+Customize reward model training parameters (see `train_and_evaluate()` in
+`story_ranking_dataset.py` for the full config):
 
 ```python
 config = {
@@ -168,4 +177,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - ModernBERT by AnswerDotAI
 - Streamlit for the web interface
 - Supabase for database services
- 

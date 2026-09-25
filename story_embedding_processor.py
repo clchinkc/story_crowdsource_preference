@@ -8,7 +8,6 @@ import numpy as np
 from tqdm import tqdm
 import logging
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -79,7 +78,7 @@ class EmbeddingProcessor:
                 for entry in tqdm(batch, desc="Processing entries"):
                     updates = {}
                     
-                    # Generate embeddings based on force_update
+                    # Generate missing embeddings, or all of them in force mode
                     if force_update or not entry.get('embedding1'):
                         embedding1 = self._generate_embedding(entry['variation1'])
                         updates['embedding1'] = embedding1
@@ -103,8 +102,7 @@ class EmbeddingProcessor:
 def main():
     try:
         processor = EmbeddingProcessor()
-        # Add force_update parameter when calling the function
-        processor.process_pending_entries(force_update=False)  # Change to True to force update all
+        processor.process_pending_entries(force_update=False)  # set True to regenerate all embeddings
     except Exception as e:
         logger.error(f"Failed to process embeddings: {str(e)}")
 

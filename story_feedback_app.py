@@ -8,7 +8,7 @@ import json
 from datetime import datetime
 from st_supabase_connection import SupabaseConnection
 
-# Configure PROVIDERS_CONFIG to include all available models
+# Prompt model plus the candidates offered in the comparison UI
 PROVIDERS_CONFIG = {
     "prompt": {
         "provider": "github",
@@ -53,7 +53,6 @@ def save_feedback(feedback_data: dict):
                 "created_at": datetime.now().isoformat()
             })
     
-    # Use Supabase client directly
     if records:
         result = conn.client.table('feedback').insert(records).execute()
         if result.data:
@@ -168,7 +167,6 @@ def main():
     st.title("Story Variant Feedback Collector")
     st.markdown("### Help improve AI storytelling by choosing the better version!")
     
-    # Add tabs for different functions
     tab1, tab2, tab3 = st.tabs(["Generate & Compare", "Historical Feedback", "Export Dataset"])
     
     with tab1:

@@ -16,7 +16,6 @@ from story_ranking_dataset import StoryRewardModel
 # Load environment variables for LLM API keys
 load_dotenv()
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -64,7 +63,6 @@ class StoryDataset(BaseModel):
             raise ValueError("At least 2 variations required")
         return v
 
-# Update client initialization with validation
 def get_configured_client(provider: str) -> instructor.Instructor:
     """Initialize and validate LLM client configuration"""
     clients = {
@@ -203,7 +201,7 @@ def compare_variations(variations: List[str], client: instructor.Instructor, mod
                 with torch.no_grad():
                     scores = reward_model(inputs['input_ids'], inputs['attention_mask'])
                     scores = scores.view(-1, 2)  # Reshape to [batch_size, 2]
-                    logits = scores[:, 0] - scores[:, 1]  # Compare scores directly
+                    logits = scores[:, 0] - scores[:, 1]  # Preference logit: score difference
                     score_diff = abs(logits[0].item())  # Use logit difference as confidence
                     preferred_index = 1 if logits[0] > 0 else 2  # Positive logit means prefer first option
                 
@@ -338,7 +336,7 @@ def generate_batch_dataset(
                     variation_models.append(variation_config["model"])
                 
                 if all_variations:
-                    # Add evaluation step
+                    # Compare pairs: reward model first, LLM fallback for uncertain ones
                     evaluation = None
                     if providers_config.get("evaluation"):
                         eval_client = get_configured_client(providers_config["evaluation"]["provider"])
@@ -362,7 +360,6 @@ def generate_batch_dataset(
                         evaluation=evaluation
                     )
                     
-                    # Save only to Supabase
                     save_dataset_to_supabase(dataset)
                     
             except Exception as e:
